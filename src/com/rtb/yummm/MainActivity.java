@@ -3,14 +3,19 @@
  * April 28, 2013
  * 
  * 
- * This app is meant as a sample app to show various functions and design aspects of a typical app.
+ * This app is meant as a sample app to show various functions and design aspects
  * 
  * It implements sharing and also saves the state of the restaurants through an external file.
  * The list of restaurants are based off of the area and currently use a simple text file right now.
  * If the text file exists, we use the one with modifications, if not, we create a new one if we make any
  * changes to whether we want to dine or not.
  * 
- * This implementation saves the restaurants that are not liked since there is always the possibility the user
+ * Future modifications would be to move the Share button to the top bar in the details window.  Pull the initial list
+ * over the internet.  Update the file stored in the /data/data/com.rtb.yummm/files directory with the updated list
+ * when turning off the app.  Splash page can get annoying so ability to disable this via settings.
+ * Nicer icons
+ * 
+ * This implementation saves the restaurants that are not "yummm"ed since there is always the possibility the user
  * pressed the thumbs down button by accident, or maybe you like the place once, but then the place becomes horrible
  * due to change of management.  These need to be accounted for.
  * 
@@ -40,7 +45,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -54,7 +58,6 @@ public class MainActivity extends FragmentActivity
     ViewPager            mViewPager;
     
     private static String sFile = "restaurantList.in";
-    private static String sTempFile = "restaurantList.temp";
     
     // Unparsed Strings
     private static List<String> fullRestaurantList = new ArrayList<String>();
@@ -64,6 +67,10 @@ public class MainActivity extends FragmentActivity
     private static List<List> mehRestaurants = new ArrayList<List>();
     private static List<List> yummmRestaurants = new ArrayList<List>();
     
+    private static int fragPosition = YummmTypes.RESTAURANTS_PAGE.getVal();
+    
+    // These types allow us to add or remove pages without having to change much code
+    // Details can also be modified easily.
     public enum YummmTypes 
     {
         YUMMM_PAGE(0),
@@ -91,6 +98,13 @@ public class MainActivity extends FragmentActivity
     };
     
     @Override
+    public void onBackPressed() 
+    {
+        MainActivity.this.finish();
+        super.onBackPressed();
+    }
+    
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -103,7 +117,7 @@ public class MainActivity extends FragmentActivity
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        mViewPager.setCurrentItem(YummmTypes.RESTAURANTS_PAGE.getVal());
+        mViewPager.setCurrentItem(fragPosition);
         
         populateRestaurantLists();
     }
@@ -114,6 +128,8 @@ public class MainActivity extends FragmentActivity
         {
             BufferedReader reader;
             
+            // If the file doesn't exist, that means we haven't made any modifications to the list yet
+            // So we load our copy from our assets
             if (!(new File(Environment.getExternalStorageDirectory() + "/" + sFile).exists()))
             {
                 reader = new BufferedReader(new InputStreamReader(getAssets().open(sFile)));
@@ -214,6 +230,9 @@ public class MainActivity extends FragmentActivity
         {
             // do something if an IOException occurs.
         }
+        
+        // Switch to correct page if there is any change
+        fragPosition = status;
     }
     
     public class SectionsPagerAdapter extends FragmentPagerAdapter
@@ -228,7 +247,6 @@ public class MainActivity extends FragmentActivity
         {
             if (position == YummmTypes.YUMMM_PAGE.getVal())
             {
-//                currentPage = YummmTypes.YUMMM_PAGE.getVal();
                 Fragment fragment = new AcceptFragment();
                 Bundle args = new Bundle();
                 fragment.setArguments(args);
@@ -236,7 +254,6 @@ public class MainActivity extends FragmentActivity
             }
             else if (position == YummmTypes.MEH_PAGE.getVal())
             {
-//                currentPage = YummmTypes.MEH_PAGE.getVal();
                 Fragment fragment = new RejectFragment();
                 Bundle args = new Bundle();
                 fragment.setArguments(args);
@@ -244,7 +261,6 @@ public class MainActivity extends FragmentActivity
             }
             else
             {
-//                currentPage = YummmTypes.RESTAURANTS_PAGE.getVal();
                 Fragment fragment = new RestaurantListFragment();
                 Bundle args = new Bundle();
                 fragment.setArguments(args);
@@ -312,6 +328,7 @@ public class MainActivity extends FragmentActivity
                     i.putExtra("restaurant_review", restaurants.get(position).get(YummmTypes.REVIEW.getVal()).toString());
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
+                    getActivity().finish();
                 }
             });
             return rootView;
@@ -354,6 +371,7 @@ public class MainActivity extends FragmentActivity
                     i.putExtra("restaurant_review", yummmRestaurants.get(position).get(YummmTypes.REVIEW.getVal()).toString());
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
+                    getActivity().finish();
                 }
             });
             
@@ -396,6 +414,7 @@ public class MainActivity extends FragmentActivity
                     i.putExtra("restaurant_review", mehRestaurants.get(position).get(YummmTypes.REVIEW.getVal()).toString());
                     i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
+                    getActivity().finish();
                 }
             });
             

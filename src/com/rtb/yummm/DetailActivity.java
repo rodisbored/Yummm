@@ -10,16 +10,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.text.util.Linkify;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DetailActivity extends Activity
 {
@@ -106,8 +104,9 @@ public class DetailActivity extends Activity
                         restReview.getText().toString().trim());
                 
                 Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                Toast.makeText(getApplicationContext(), "YUMMM...", Toast.LENGTH_SHORT).show();
+                DetailActivity.this.finish();
             }
         });
         
@@ -129,8 +128,9 @@ public class DetailActivity extends Activity
                         restReview.getText().toString().trim());
                 
                 Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                Toast.makeText(getApplicationContext(), "MEH!", Toast.LENGTH_SHORT).show();
+                DetailActivity.this.finish();
             }
         });
         
@@ -180,8 +180,8 @@ public class DetailActivity extends Activity
                     restaurant_status, 
                     restReview.getText().toString().trim());
             Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
+            DetailActivity.this.finish();
         }
         else
         {
