@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent" 
+    android:background="#000000"
+    android:fillViewport="true" >
+
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:background="#000000"
+	    android:paddingBottom="@dimen/activity_vertical_margin"
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin"
+	    android:paddingTop="@dimen/activity_vertical_margin" >
+
+	    <TextView
+	        android:id="@+id/restaurantName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:clickable="false"
+	        android:focusable="false"
+	        android:text="Restaurant Name"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="@android:color/white" />
+
+	    <TextView
+	        android:id="@+id/restaurantAddress"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/restaurantName"
+	        android:ems="10"
+	        android:inputType="none"
+	        android:minLines="2"
+	        android:textColor="@android:color/white" />
+
+	    <TextView
+	        android:id="@+id/restaurantPhone"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/restaurantAddress"
+	        android:layout_below="@+id/restaurantAddress"
+	        android:ems="10"
+	        android:inputType="none"
+	        android:textColor="@android:color/white" />
+
+	    <EditText
+	        android:id="@+id/reviewTextBox"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@+id/reviewLabel"
+	        android:layout_marginTop="10dp"
+	        android:background="@android:color/white"
+	        android:ems="10"
+	        android:gravity="top"
+	        android:inputType="textMultiLine"
+	        android:minLines="5"
+	        android:paddingBottom="2dp"
+	        android:paddingLeft="2dp"
+	        android:paddingRight="2dp"
+	        android:paddingTop="2dp"
+	        android:textColor="@android:color/black" />
+
+	    <ImageButton
+	        android:id="@+id/thumbsUp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/reviewTextBox"
+	        android:layout_below="@+id/restaurantPhone"
+	        android:layout_marginLeft="40dp"
+	        android:layout_marginTop="40dp"
+	        android:background="@android:color/black"
+	        android:minHeight="60dp"
+	        android:minWidth="60dp"
+	        android:src="@drawable/thumb_blue" />
+	    
+   	    <TextView
+	        android:id="@+id/yummmLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/mehLabel"
+	        android:layout_alignLeft="@+id/thumbsUp"
+	        android:layout_marginLeft="5dp"
+	        android:text="yummm"
+	        android:textColor="@android:color/white" />
+
+        <ImageButton
+            android:id="@+id/thumbsDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:layout_alignRight="@+id/reviewTextBox"
+        	android:layout_alignTop="@+id/thumbsUp" 
+        	android:layout_marginRight="40dp"
+            android:minHeight="60dp"
+            android:minWidth="60dp"
+            android:src="@drawable/thumb_red" />
+        
+      	<TextView
+	        android:id="@+id/mehLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_above="@+id/thumbsDown"
+	        android:layout_alignLeft="@+id/thumbsDown"
+	        android:layout_marginLeft="15dp"
+	        android:text="meh"
+	        android:textColor="@android:color/white" />
+
+	    <TextView
+	        android:id="@+id/reviewLabel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/reviewTextBox"
+	        android:layout_below="@+id/thumbsUp"
+	        android:layout_marginTop="22dp"
+	        android:editable="false"
+	        android:text="REVIEW:"
+	        android:textAppearance="?android:attr/textAppearanceSmall"
+	        android:textColor="@android:color/white" />
+
+	    <ImageButton
+	        android:id="@+id/shareButton"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignTop="@+id/restaurantName"
+	        android:src="@drawable/share" />
+
+	</RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Yummm</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_fragment_restaurants">Restaurants</string>
+    <string name="title_fragment_reject">Meh</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_fragment_accept">Yummm</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_detail">DetailActivity</string>
+
+</resources>
